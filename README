@@ -1,5 +1,6 @@
 Installs:
 pip install django
 pip install pattern
+pip install pymongo
 
-Currently the website displays 2 pulled tweets about Lady Gaga. Waiting on front.
+Pulls tweets. More to come.
