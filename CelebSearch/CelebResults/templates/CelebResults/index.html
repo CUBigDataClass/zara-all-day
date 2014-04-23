@@ -1,15 +1,15 @@
 <html>
 <head>
-    <title>Tweets IN</title>
+    <title>Tweets</title>
 </head>
 <body>
-    <ol>
-    {% for tweet in tweets %}
-        <li> {{tweet.text}} </li>
-    {% endfor %}
-    {% for score in scores %}
-        <li> {{score}} </li>
-    {% endfor %}
-    </ol>
+    <h1>ZARA FOR DAYS</h1>
+    <h4>A ZaraAllDay&copy; Production</h4>
+    <div>
+    <form action="/results/" method="get">
+    Artist name: <input type="text" name="artistname"><br>
+    <input type="submit" value="Search"></input>
+    </form> 
+    </div>
 </body>
 </html>

@@ -6,4 +6,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', 'CelebResults.views.index'),
+    url(r'results/$', 'CelebResults.views.results'),
+
 )

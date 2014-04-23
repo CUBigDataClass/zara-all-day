@@ -5,11 +5,15 @@ from pattern.en import sentiment
 import pymongo
 from pymongo import MongoClient
 
+class Tweet(models.Model):
+    _id = models.BigIntegerField()
+    text = models.CharField(max_length=160)
+    date = models.DateTimeField()
+
+
 class Clips_Adaptor(models.Model):
 
-    def search_tweets(self):
-        #TODO: make celeb a user input
-        celeb="Lady Gaga"
+    def search_tweets(self, celeb):
         twitter_api = Twitter(language='en')
         #TODO: up the count for the final project
         return twitter_api.search(celeb, count=2)
