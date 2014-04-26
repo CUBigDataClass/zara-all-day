@@ -1,14 +1,17 @@
 from django.http import HttpResponse
-from django.template import loader, Context
-from django.shortcuts import render
+from django.template import loader, Context, RequestContext
+from django.shortcuts import render, render_to_response
 
 from CelebResults.models import Clips_Adaptor
 
 def index(request):
-    template = loader.get_template('CelebResults/index.html')
-    context = Context()
-    response = template.render(context)
-    return HttpResponse(response)
+    #template = loader.get_template('CelebResults/index.html')
+    #context = Context()
+    context = RequestContext(request,{
+
+        })
+    #response = template.render(context)
+    return render_to_response('CelebResults/index.html', context)
 
 def results(request):
     if request.method == "GET":

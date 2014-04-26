@@ -81,3 +81,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Adding the following lines to support static files. Fox, if things start to break, looks here first.
+
+STATICFILES_DIRS = (
+     os.path.join(BASE_DIR, 'static'),
+)
+"""
+STATICFILES_FINDERS = (
+   'django.contrib.staticfiles.finders.FileSystemFInder',
+   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)"""
+

@@ -1,0 +1,42 @@
+body{
+
+  		}
+  		h1 {
+  			color: black;
+  		}
+      #logo{
+        margin-left: 100px;
+        float:left;
+      }
+      #logo2{
+        position: absolute;
+        top:87px;
+        left:115px;
+      }
+      #form1{
+        float:right;
+        margin-right:130px;
+        margin-top:14px;
+      }
+      #submit_button{
+        background-color:transparent;
+        position:absolute;
+        top:87px;
+        left:114px;
+        height:60px;
+        width:62px;
+        cursor:pointer;
+        border:none;
+      }
+  		#centered_div{ 
+  			width: 500px;
+  			height: 300px;
+  			position: absolute;
+  			top: 50%;
+  			left: 50%;
+  			margin-left: -250px;
+  			margin-top: -150px;
+  			background-color: white;
+  			border: 1px solid white;
+  			border-radius: 25px;
+  		}
