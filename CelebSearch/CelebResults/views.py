@@ -1,34 +1,42 @@
 from django.http import HttpResponse
-from django.template import loader, Context, RequestContext
-from django.shortcuts import render, render_to_response
+from django.template import loader, RequestContext
+from django.shortcuts import render_to_response
 
-from CelebResults.models import Clips_Adaptor
+from CelebResults.models import Clips_Adaptor, Mongo_Service
 
 def index(request):
-    #template = loader.get_template('CelebResults/index.html')
-    #context = Context()
+    '''
+    Renders the main search page
+    '''
     context = RequestContext(request,{
-
         })
-    #response = template.render(context)
     return render_to_response('CelebResults/index.html', context)
 
 def results(request):
+    '''
+    Renders the results page
+    '''
     if request.method == "GET":
         clips = Clips_Adaptor()
+        mongodb = Mongo_Service()
         name = request.GET.__getitem__("artistname")
 
-        # If no input given, stay on search page
+        ## If no input given, stay on search page
         if name == "":
             template = loader.get_template('CelebResults/index.html')
             context = Context()
             response = template.render(context)
             return HttpResponse(response)
 
-        tweets = clips.search_tweets(name)
+        ## Search tweets in mongo
+        tweets = mongodb.search_tweets(name)
+        
+        ## If none found, search twitter
+        if len(tweets) == 0:
+            tweets = clips.search_tweets(name)
+
+        ## Score the tweets with sentiment analysis
         scores = clips.get_sentiment(tweets)
-        print tweets, scores
-        template = loader.get_template('CelebResults/results.html')
-        context = Context({'tweets':tweets, 'scores': scores})
-        response = template.render(context)
-        return HttpResponse(response)
+
+        return render_to_response('CelebResults/results.html', {'tweets':tweets, 'scores': scores})
+

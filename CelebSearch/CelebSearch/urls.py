@@ -8,7 +8,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'CelebSearch.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    #url(r'^$','CelebSearch.views.index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'',include('CelebResults.urls')),
 )
