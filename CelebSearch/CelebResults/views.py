@@ -23,10 +23,9 @@ def results(request):
 
         ## If no input given, stay on search page
         if name == "":
-            template = loader.get_template('CelebResults/index.html')
-            context = Context()
-            response = template.render(context)
-            return HttpResponse(response)
+            context = RequestContext(request,{
+            })
+            return render_to_response('CelebResults/index.html', context)
 
         ## Search tweets in mongo
         tweets = mongodb.search_tweets(name)
