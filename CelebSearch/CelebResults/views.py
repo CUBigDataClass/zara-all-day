@@ -37,6 +37,6 @@ def results(request):
 
         ## Score the tweets with sentiment analysis
         scores = clips.get_sentiment(tweets)
-
-        return render_to_response('CelebResults/results.html', {'tweets':tweets, 'scores': scores})
+        context = RequestContext(request, {'tweets':tweets, 'scores': scores})
+        return render_to_response('CelebResults/results.html', context)
 
