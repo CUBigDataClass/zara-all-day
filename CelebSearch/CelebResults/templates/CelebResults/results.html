@@ -2,6 +2,10 @@
 <head>
     <title>Tweets</title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <link rel="stylesheet" type="text/css" href="http://visapi-gadgets.googlecode.com/svn/trunk/termcloud/tc.css"/>
+    <script type="text/javascript" src="http://visapi-gadgets.googlecode.com/svn/trunk/termcloud/tc.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
+
     <script>
     	var tweet_data = [];
     	var tweet_subjectivity = [];
@@ -50,7 +54,7 @@
         var data2 = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
           ['Opinion',     opinion],
-          ['fact',      fact],
+          ['Fact',      fact],
           ['Neither',  neither],
         ]);
 
@@ -79,8 +83,16 @@
         chart2.draw(data2,options2);
       }
     </script>
+
 </head>
 <body>
+	<div id="banner">
+		<img id="zara_banner" src="{{STATIC_URL}}img/zara_background.png"></img>
+	</div>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="piechart2" style="width: 900px; height: 500px;"></div>
+    <div id="tcdiv"></div>
+    <div id="tcdiv2"></div>
     <ol>
     {% for tweet in tweets %}
         <li> {{tweet.text}} </li>
@@ -89,7 +101,77 @@
         <li> {{score}} </li>
     {% endfor %}
     </ol>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-    <div id="piechart2" style="width: 900px; height: 500px;"></div>
 </body>
+<script type="text/javascript">
+	  //figure out which tweets are positive and which are negative
+	  var tweet_array = [];
+	  var positive_tweet = [];
+	  var negative_tweet = [];
+	  {% for tweet in tweets %}
+			var str = "{{tweet.text}}";
+			str = str.replace(/['"]+/g, '');
+			tweet_array.push(str);
+	  {% endfor %}
+	  for(var i = 0; i < tweet_data.length; i++ ){
+	  	if(tweet_data[i] > 0.0){
+	  		positive_tweet.push(tweet_array[i]);
+	  	} else if (tweet_data[i] < 0.0){
+	  		negative_tweet.push(tweet_array[i]);
+	  	}
+	  }
+	  //Now, positive_tweet[] holds all of the positive tweets, and negative_tweet holds all of the negative tweets.
+	  //Create tag clouds out of each of these arrays.
+    /*  google.load("visualization", "1");
+      google.setOnLoadCallback(draw);
+      function draw() {
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Label');
+        data.addColumn('number', 'Value');
+        data.addColumn('string', 'Link');
+        data.addRows(positive_tweet.length);
+        for(var twe = 0; twe < positive_tweet.length; twe++){
+        //{% for tweet in tweets %}
+        	for(var x = 0; x < 3; x++){
+        		if(x == 0){
+        			data.setValue(twe,x,positive_tweet[twe]);
+        			
+        		} else if (x == 1){
+        			data.setValue(twe,x,80); //maybe make the size random, or based on the tweets polarity value
+        			
+        		} else {
+        			data.setValue(twe,x,"");
+        			
+        		}
+        	}
+        //{% endfor %}
+        }
+        data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Label');
+        data2.addColumn('number', 'Value');
+        data2.addColumn('string', 'Link');
+        data2.addRows(negative_tweet.length);
+        for(var twe = 0; twe < negative_tweet.length; twe++){
+        //{% for tweet in tweets %}
+        	for(var x = 0; x < 3; x++){
+        		if(x == 0){
+        			data.setValue(twe,x,negative_tweet[twe]);
+        			
+        		} else if (x == 1){
+        			data.setValue(twe,x,80); //maybe make the size random, or based on the tweets polarity value
+        			
+        		} else {
+        			data.setValue(twe,x,"");
+        			
+        		}
+        	}
+        //{% endfor %}
+        }
+        var outputDiv = document.getElementById('tcdiv');
+        var tc = new TermCloud(outputDiv);
+        tc.draw(data, null);
+        var outputDiv2 = document.getElementById('tcdiv2');
+        var tc2 = new TermCloud(outputDiv2);
+        tc2.draw(data2, null);
+      }*/
+    </script>
 </html>
