@@ -35,6 +35,9 @@ def results(request):
         if len(tweets) == 0:
             tweets = clips.search_tweets(name)
 
+        for tweet in tweets:
+            tweet["text"]=tweet["text"].replace('"','')
+
         ## Score the tweets with sentiment analysis
         scores = clips.get_sentiment(tweets)
         context = RequestContext(request, {'tweets':tweets, 'scores': scores})
