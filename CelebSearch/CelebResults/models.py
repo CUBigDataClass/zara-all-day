@@ -16,7 +16,7 @@ class Clips_Adaptor(models.Model):
         '''
         twitter_api = Twitter(language='en')
         #TODO: up the count for the final project
-        return twitter_api.search(celeb, count=10)
+        return twitter_api.search(celeb, count=3000)
 
     def get_sentiment(self, tweets):
         '''
