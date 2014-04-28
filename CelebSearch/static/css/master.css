@@ -7,13 +7,10 @@
       li{
         border: 1px solid black;
       }
-      #banner{
-        height:200px;
-        width:1100px;
-      }
-      #zara_banner{
-        height:190px;
-        width:1099px;
+      #pie_chart_container{
+        background-color:#1B1B1B;
+        height:500px;
+        margin-top:50px;
       }
       #logo{
         margin-left: 100px;
@@ -28,6 +25,30 @@
         float:right;
         margin-right:120px;
         margin-top:14px;
+      }
+      #pie_title{
+        position: absolute;
+        left:450px;
+      }
+      #piechart{
+        width: 400px; 
+        height: 500px;
+        position:absolute;
+        top:200px;
+        left:100px;
+      }
+      #piechart2{
+        width: 400px; 
+        height: 500px;
+        position:absolute;
+        top:200px;
+        left:850px;
+        
+      }
+      #aggregate_description{
+        position:absolute;
+        top:550px;
+        left:400px;
       }
       #submit_button{
         background-color:transparent;
@@ -51,3 +72,15 @@
   			border: 1px solid white;
   			border-radius: 25px;
   		}
+      #tcdiv{
+        height:200px;
+        width:200px;
+        border:1px solid red;
+        
+      }
+      #tcdiv2{
+        height:200px;
+        width:200px;
+        border:1px solid green;
+
+      }

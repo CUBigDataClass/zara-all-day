@@ -2,8 +2,8 @@
 <head>
     <title>Tweets</title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <link rel="stylesheet" type="text/css" href="http://visapi-gadgets.googlecode.com/svn/trunk/termcloud/tc.css"/>
-    <script type="text/javascript" src="http://visapi-gadgets.googlecode.com/svn/trunk/termcloud/tc.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.css"/>
+    <script type="text/javascript" src="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.js"></script>
         <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
 
     <script>
@@ -60,6 +60,15 @@
 
         var options = {
           title: 'Aggregate Sentiment',
+          titleTextStyle:{
+          	color: 'white'
+          },
+          backgroundColor: 'transparent',
+          legend:{textStyle: {
+          	color: 'white',
+          	fontName: 'Arial',
+          	fontSize: '12'
+          }},
           slices:{
           	0: {color: 'black'},
           	1: {color: 'gray'},
@@ -69,6 +78,15 @@
 
         var options2 = {
           title: 'Tweet Subjectivity',
+          titleTextStyle:{
+          	color: 'white'
+          },
+          backgroundColor: 'transparent',
+          legend:{textStyle: {
+          	color: 'white',
+          	fontName: 'Arial',
+          	fontSize: '12'
+          }},
           slices:{
           	0: {color: 'black'},
           	1: {color: 'gray'},
@@ -87,30 +105,31 @@
 </head>
 <body>
 	<div id="banner">
-		<img id="zara_banner" src="{{STATIC_URL}}img/zara_background.png"></img>
+		<img id="zara_banner" src="{{STATIC_URL}}img/banner.png"></img>
 	</div>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-    <div id="piechart2" style="width: 900px; height: 500px;"></div>
-    <div id="tcdiv"></div>
-    <div id="tcdiv2"></div>
-    <ol>
-    {% for tweet in tweets %}
-        <li> {{tweet.text}} </li>
-    {% endfor %}
-    {% for score in scores %}
-        <li> {{score}} </li>
-    {% endfor %}
-    </ol>
+	<div id="pie_chart_container">
+		<img id="pie_title" src="{{STATIC_URL}}img/pie_title.png"></img>
+    	<div id="piechart" ></div>
+    	<div id="piechart2"></div>
+    	<img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
+    </div>
+   <!-- <div id="tcdiv"></div>
+    <div id="tcdiv2"></div> -->
 </body>
 <script type="text/javascript">
 	  //figure out which tweets are positive and which are negative
-	  var tweet_array = [];
+	/*  var tweet_array = [];
 	  var positive_tweet = [];
 	  var negative_tweet = [];
+	  var array_test = [];
 	  {% for tweet in tweets %}
+	  		try{
 			var str = "{{tweet.text}}";
-			str = str.replace(/['"]+/g, '');
+			
 			tweet_array.push(str);
+		} catch(err){
+			alert("failed");
+		}
 	  {% endfor %}
 	  for(var i = 0; i < tweet_data.length; i++ ){
 	  	if(tweet_data[i] > 0.0){
@@ -119,59 +138,27 @@
 	  		negative_tweet.push(tweet_array[i]);
 	  	}
 	  }
-	  //Now, positive_tweet[] holds all of the positive tweets, and negative_tweet holds all of the negative tweets.
-	  //Create tag clouds out of each of these arrays.
-    /*  google.load("visualization", "1");
+      google.load("visualization", "1");
       google.setOnLoadCallback(draw);
       function draw() {
         data = new google.visualization.DataTable();
         data.addColumn('string', 'Label');
-        data.addColumn('number', 'Value');
-        data.addColumn('string', 'Link');
         data.addRows(positive_tweet.length);
         for(var twe = 0; twe < positive_tweet.length; twe++){
-        //{% for tweet in tweets %}
-        	for(var x = 0; x < 3; x++){
-        		if(x == 0){
-        			data.setValue(twe,x,positive_tweet[twe]);
-        			
-        		} else if (x == 1){
-        			data.setValue(twe,x,80); //maybe make the size random, or based on the tweets polarity value
-        			
-        		} else {
-        			data.setValue(twe,x,"");
-        			
-        		}
+        	data.setValue(twe,0,poitive_tweet[twe]);
         	}
-        //{% endfor %}
-        }
         data2 = new google.visualization.DataTable();
         data2.addColumn('string', 'Label');
-        data2.addColumn('number', 'Value');
-        data2.addColumn('string', 'Link');
         data2.addRows(negative_tweet.length);
         for(var twe = 0; twe < negative_tweet.length; twe++){
-        //{% for tweet in tweets %}
-        	for(var x = 0; x < 3; x++){
-        		if(x == 0){
-        			data.setValue(twe,x,negative_tweet[twe]);
-        			
-        		} else if (x == 1){
-        			data.setValue(twe,x,80); //maybe make the size random, or based on the tweets polarity value
-        			
-        		} else {
-        			data.setValue(twe,x,"");
-        			
-        		}
+        	data2.setValue(twe,0,negative_tweet[twe]);
         	}
-        //{% endfor %}
-        }
         var outputDiv = document.getElementById('tcdiv');
-        var tc = new TermCloud(outputDiv);
+        var tc = new WordCloud(outputDiv);
         tc.draw(data, null);
         var outputDiv2 = document.getElementById('tcdiv2');
-        var tc2 = new TermCloud(outputDiv2);
+        var tc2 = new WordCloud(outputDiv2);
         tc2.draw(data2, null);
-      }*/
+    }*/
     </script>
 </html>
