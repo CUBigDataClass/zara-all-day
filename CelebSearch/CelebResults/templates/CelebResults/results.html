@@ -114,11 +114,12 @@
    {% endfor %}
   function drawMap() {
     var data_array = [];
-    data_array.push(['lat','lon','color']);
+    //data_array.push(['lat','lon','color']);
+    data_array.push(['lat','lon']);
     //add coordinates to array
     
     for(var i = 0; i < coord_array.length; i++){
-      coord_array[i].push(i+20);
+      //coord_array[i].push(i+20);
       data_array.push(coord_array[i]);
     }
     var data = google.visualization.arrayToDataTable(
