@@ -80,19 +80,27 @@
       #tweet_map_title{
         position: absolute;
         margin-top:20px;
-        left:500px;
+        left:475px;
         top:700px;
       }
       #map_canvas{
         position: absolute;
         left: 320px;
         top: 800px;
+        width:700px;
+        height:347px;
       }
       #tcdiv{
         height:200px;
         width:200px;
         border:1px solid red;
         
+      }
+      #map_canvas rect{
+        display:none;
+      }
+      #map_canvas text{
+        display: none;
       }
       #tcdiv2{
         height:200px;

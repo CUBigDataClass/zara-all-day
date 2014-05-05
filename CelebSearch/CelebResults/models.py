@@ -48,7 +48,7 @@ class Mongo_Service(models.Model):
         Searches tweets database based on the given celebrity.
         '''
         result = []
-        for tweet in self.collection.find({"text": {"$regex": celeb, "$options": "-i"}},{"text": 1, "_id": 0}):
+        for tweet in self.collection.find({"text": {"$regex": celeb, "$options": "-i"}},{"text": 1, "coordinates": 1, "_id": 0}):
             result.append(tweet)
         return result
 

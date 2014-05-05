@@ -104,25 +104,40 @@
     <script type='text/javascript'>
    google.load('visualization', '1', {'packages': ['geomap']});
    google.setOnLoadCallback(drawMap);
+   var coord_array = [];
+   //this next step should read in the coordinates
+   {% for x in coordinates %}
+      if( ({{x}}[0] != -200) && ({{x}}[1] != -200) ){
+        coord_array.push({{x}});
+      }
 
-    function drawMap() {
-      var data = google.visualization.arrayToDataTable([
-        ['Country', 'Tweet Sentiment'],
-        ['Japan', 1],
-        ['United States', 1],
-        ['Brazil', -1],
-        ['Canada', 0],
-        ['Indonesia', -1],
-      ]);
+   {% endfor %}
+  function drawMap() {
+    var data_array = [];
+    data_array.push(['lat','lon','color']);
+    //add coordinates to array
+    
+    for(var i = 0; i < coord_array.length; i++){
+      coord_array[i].push(i+20);
+      data_array.push(coord_array[i]);
+    }
+    var data = google.visualization.arrayToDataTable(
+        data_array
+    );
+  
+    var options = {
+      width: '700px',
+      height: '347px',
+      displayMode: 'markers',
+      backgroundColor: 'black',
+      colorAxis:{colors: ['#48C5DB', '#48C5DB']},
+    };
 
-      var options = {};
-      options['colors'] = [0x838F9B,0xc0c0c0,0x000000];
-      options['height'] = '347px';
-      options['width']  = '700px';
-      var container = document.getElementById('map_canvas');
-      var geomap = new google.visualization.GeoMap(container);
-      geomap.draw(data, options);
-  };
+    var geochart = new google.visualization.GeoChart(
+      document.getElementById('map_canvas'));
+    geochart.draw(data, options);
+  }
+  
   </script>
 
 </head>
