@@ -4,7 +4,7 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <link rel="stylesheet" type="text/css" href="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.css"/>
     <script type="text/javascript" src="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.js"></script>
-        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/master.css"></link>
 
     <script>
     	var tweet_data = [];
@@ -101,6 +101,29 @@
         chart2.draw(data2,options2);
       }
     </script>
+    <script type='text/javascript'>
+   google.load('visualization', '1', {'packages': ['geomap']});
+   google.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Country', 'Tweet Sentiment'],
+        ['Japan', 1],
+        ['United States', 1],
+        ['Brazil', -1],
+        ['Canada', 0],
+        ['Indonesia', -1],
+      ]);
+
+      var options = {};
+      options['colors'] = [0x838F9B,0xc0c0c0,0x000000];
+      options['height'] = '347px';
+      options['width']  = '700px';
+      var container = document.getElementById('map_canvas');
+      var geomap = new google.visualization.GeoMap(container);
+      geomap.draw(data, options);
+  };
+  </script>
 
 </head>
 <body>
@@ -109,13 +132,33 @@
 	</div>
 	<div id="pie_chart_container">
 		<img id="pie_title" src="{{STATIC_URL}}img/pie_title.png"></img>
-    	<div id="piechart" ></div>
-    	<div id="piechart2"></div>
-    	<img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
-    </div>
+  	<div id="piechart" ></div>
+  	<div id="piechart2"></div>
+    <img id="aggregate_description" src="{{STATIC_URL}}img/pie_description.png"></img>
+  </div>
+  <div id="map_container">
+    <img id="tweet_map_title" src="{{STATIC_URL}}img/map.PNG"></img>
+    <div id='map_canvas'></div>
+  </div>
    <!-- <div id="tcdiv"></div>
     <div id="tcdiv2"></div> -->
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 	  //figure out which tweets are positive and which are negative
 	/*  var tweet_array = [];
